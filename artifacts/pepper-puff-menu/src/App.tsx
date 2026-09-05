@@ -429,15 +429,9 @@ function MenuPage() {
             </a>
           </div>
         </div>
-        <div className="reveal delay-2 relative mx-auto w-full max-w-[27rem]">
-          <div className="absolute -right-2 top-5 h-full w-full rotate-6 rounded-[48%] border border-[#75813d]/35" />
-          <div className="relative aspect-square overflow-hidden rounded-[48%] border-[10px] border-[#fff6e8] bg-[#f5d6a7] shadow-[0_25px_60px_rgba(84,40,18,.17)]">
-            <img src={logoPath} alt="Pepper & Puff — Flavours That Feel Like Home" className="h-full w-full object-cover" />
-          </div>
-          <div className="absolute -bottom-4 -left-3 flex rotate-[-7deg] items-center gap-2 rounded-full border border-[#572514]/15 bg-[#f8dfb6] px-4 py-2 shadow-sm">
-            <Sparkles size={14} className="text-[#b4402b]" />
-            <span className="font-mono-brand text-[9px] uppercase tracking-[.14em] text-[#572514]">Made fresh, always</span>
-          </div>
+        <div className="reveal delay-2 relative mx-auto w-full max-w-[34rem]">
+          <p className="mb-3 font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#a7461d]">On the tray · small chops · cakes · pastries</p>
+          <FoodCarousel />
         </div>
       </section>
 
