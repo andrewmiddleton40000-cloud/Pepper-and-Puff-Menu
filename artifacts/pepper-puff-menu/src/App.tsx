@@ -1,6 +1,6 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ArrowUpRight, Check, ChevronRight, Clock3, Copy, Instagram, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
+import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock3, Copy, Instagram, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -8,6 +8,10 @@ import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 import logoPath from '@assets/pepper-puff-logo.png';
 import markPath from '@assets/pepper-puff-logo-mark.png';
+import samosaPath from '@assets/food/samosa.jpg';
+import cakePath from '@assets/food/cake.jpg';
+import pastriesPath from '@assets/food/pastries.jpg';
+import jollofPath from '@assets/food/jollof.jpg';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -50,6 +54,7 @@ const pastries: MenuItem[] = [
 ];
 
 const formatNaira = (value: number) => `₦${value.toLocaleString('en-NG')}`;
+const defaultWhatsAppUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hello Pepper & Puff, I would like to ask about your menu.')}`;
 
 function useReveal() {
   useEffect(() => {
@@ -116,7 +121,8 @@ function QrCode() {
   const [menuUrl, setMenuUrl] = useState('');
 
   useEffect(() => {
-    setMenuUrl(window.location.href);
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+    setMenuUrl(`${window.location.origin}${basePath}/menu`);
   }, []);
 
   const qrUrl = menuUrl
@@ -140,7 +146,222 @@ function QrCode() {
   );
 }
 
-function Home() {
+type FoodStory = {
+  image: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+};
+
+const foodStories: FoodStory[] = [
+  {
+    image: samosaPath,
+    eyebrow: 'Small chops',
+    title: 'The first plate always disappears first.',
+    description: 'Golden samosa, puff puff and party bites made for passing around.',
+  },
+  {
+    image: cakePath,
+    eyebrow: 'Celebration cakes',
+    title: 'Make the moment a little sweeter.',
+    description: 'Soft layers, generous frosting and a centrepiece worth gathering around.',
+  },
+  {
+    image: pastriesPath,
+    eyebrow: 'Fresh pastries',
+    title: 'Something warm for the road.',
+    description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
+  },
+  {
+    image: jollofPath,
+    eyebrow: 'Flavours that feel like home',
+    title: 'Come hungry. Leave happy.',
+    description: 'Nigerian comfort food and bakes, prepared with the warmth of home.',
+  },
+];
+
+function FoodCarousel() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeStory = foodStories[activeIndex];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % foodStories.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const move = (direction: number) => {
+    setActiveIndex((current) => (current + direction + foodStories.length) % foodStories.length);
+  };
+
+  return (
+    <div className="relative overflow-hidden rounded-[1.8rem] border border-[#5c2f15]/15 bg-[#f3d9ac] shadow-[0_24px_60px_rgba(84,40,18,.14)]" data-testid="carousel-food-stories">
+      <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/4]">
+        <img
+          key={activeStory.image}
+          src={activeStory.image}
+          alt={activeStory.title}
+          className="h-full w-full object-cover transition-opacity duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#572514]/90 via-[#572514]/10 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-6 text-[#fff6e8] sm:p-8">
+          <p className="font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#f5d6a7]">{activeStory.eyebrow}</p>
+          <h2 className="mt-3 max-w-md font-display text-4xl leading-[.95] sm:text-5xl">{activeStory.title}</h2>
+          <p className="mt-3 max-w-sm text-sm leading-6 text-[#f8e8d2]">{activeStory.description}</p>
+        </div>
+      </div>
+      <div className="flex items-center justify-between gap-4 bg-[#fff6e8] px-5 py-4">
+        <div className="flex gap-1.5" aria-label="Food photo slides">
+          {foodStories.map((story, index) => (
+            <button
+              key={story.eyebrow}
+              onClick={() => setActiveIndex(index)}
+              className={`h-1.5 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-[#a7461d]' : 'w-3 bg-[#d7b995]'}`}
+              aria-label={`Show ${story.eyebrow} slide`}
+              aria-current={index === activeIndex}
+            />
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => move(-1)} className="rounded-full border border-[#5c2f15]/20 p-2 text-[#572514] transition-colors hover:bg-[#f3d9ac]" aria-label="Previous food photo">
+            <ChevronLeft size={16} />
+          </button>
+          <button onClick={() => move(1)} className="rounded-full border border-[#5c2f15]/20 p-2 text-[#572514] transition-colors hover:bg-[#f3d9ac]" aria-label="Next food photo">
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Landing() {
+  useReveal();
+
+  return (
+    <main id="top" className="menu-paper min-h-[100dvh] text-[#572514]">
+      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
+        <a href="/" className="flex items-center gap-3" data-testid="link-home">
+          <img src={markPath} alt="Pepper & Puff mark" className="h-11 w-11 rounded-full object-cover shadow-sm" />
+          <span className="hidden font-mono-brand text-[10px] uppercase tracking-[.17em] text-[#6f5342] sm:block">Flavours that feel like home</span>
+        </a>
+        <nav className="hidden items-center gap-7 md:flex">
+          <a href="#story" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]">Our story</a>
+          <a href="#favourites" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]">Favourites</a>
+          <a href="/menu" className="flex items-center gap-2 rounded-full bg-[#a7461d] px-4 py-2.5 font-mono-brand text-[10px] uppercase tracking-[.13em] text-[#fff6e8]" data-testid="link-menu-nav">
+            View menu <ArrowUpRight size={14} />
+          </a>
+        </nav>
+        <a href="/menu" className="rounded-full border border-[#5c2f15]/20 p-2.5 md:hidden" aria-label="Open menu" data-testid="link-menu-mobile">
+          <Menu size={18} />
+        </a>
+      </header>
+
+      <section className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-12 sm:px-8 sm:pb-28 lg:grid-cols-[.9fr_1.1fr] lg:gap-20 lg:pt-20">
+        <div className="hero-orb -left-20 top-20 h-60 w-60 bg-[#e9bd72]/25" />
+        <div className="relative z-[1] reveal">
+          <div className="mb-7 flex items-center gap-3">
+            <span className="h-px w-8 bg-[#a7461d]" />
+            <span className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#a7461d]">Nigerian home-style food & bakes</span>
+          </div>
+          <h1 className="max-w-2xl font-display text-[4.4rem] leading-[.84] tracking-[-.045em] text-[#572514] sm:text-[6.8rem] lg:text-[8.2rem]">
+            Made for<br /><em className="text-[#b4402b]">your people.</em>
+          </h1>
+          <p className="mt-8 max-w-md text-base leading-7 text-[#6f5342] sm:text-lg">
+            Small chops, celebration cakes and warm pastries for the table, the office, and every “just one more” moment.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <a href="/menu" className="inline-flex items-center gap-3 rounded-full bg-[#a7461d] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
+              Explore the menu <ChevronRight size={15} />
+            </a>
+            <a href={defaultWhatsAppUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#a7461d]/40 px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#a7461d] transition-colors hover:bg-[#a7461d]/10" data-testid="link-whatsapp-hero">
+              WhatsApp us <ArrowUpRight size={15} />
+            </a>
+          </div>
+          <div className="mt-8 flex items-center gap-3 text-[#8b6d59]">
+            <span className="font-mono-brand text-[10px] uppercase tracking-[.18em]">Made fresh in Nigeria</span>
+            <span className="text-[#e68a32]">•</span>
+            <span className="font-mono-brand text-[10px] uppercase tracking-[.18em]">Order with love</span>
+          </div>
+        </div>
+        <div className="reveal delay-2 relative mx-auto w-full max-w-[34rem]">
+          <FoodCarousel />
+        </div>
+      </section>
+
+      <section className="border-y border-[#5c2f15]/15 bg-[#572514] px-5 py-5 text-[#fff6e8] sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <p className="font-display text-xl">For the first bite, the last bite, and everything in between.</p>
+          <div className="flex flex-wrap gap-x-7 gap-y-2 font-mono-brand text-[9px] uppercase tracking-[.18em] text-[#f5d6a7]">
+            <span>Small chops</span><span className="text-[#e68a32]">•</span><span>Celebration cakes</span><span className="text-[#e68a32]">•</span><span>Fresh pastries</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="story" className="reveal px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_.85fr] lg:gap-20">
+          <div>
+            <p className="font-mono-brand text-[10px] uppercase tracking-[.23em] text-[#75813d]">A little taste of home</p>
+            <h2 className="mt-4 max-w-2xl font-display text-5xl leading-[.94] text-[#572514] sm:text-7xl">The kind of food that brings people closer.</h2>
+          </div>
+          <div className="border-l border-[#5c2f15]/20 pl-6 sm:pl-8">
+            <p className="text-base leading-8 text-[#6f5342]">Pepper & Puff is here for the full table: the party tray at a naming ceremony, the cake carried into the office, the meat pie that makes a quick afternoon feel cared for.</p>
+            <a href="/menu" className="mt-7 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#a7461d] hover:text-[#572514]">See what is cooking <ArrowUpRight size={14} /></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="favourites" className="reveal bg-[#f3d9ac]/50 px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
+          {[
+            { image: samosaPath, label: 'Small chops', title: 'For sharing', href: '/menu#small-chops' },
+            { image: cakePath, label: 'Cakes', title: 'For marking the moment', href: '/menu#cakes' },
+            { image: pastriesPath, label: 'Pastries', title: 'For the road', href: '/menu#pastries' },
+          ].map((card) => (
+            <a key={card.label} href={card.href} className="group overflow-hidden rounded-[1.35rem] bg-[#fff6e8] shadow-[0_12px_28px_rgba(84,40,18,.06)]">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img src={card.image} alt={card.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              </div>
+              <div className="flex items-center justify-between p-5">
+                <div><p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#75813d]">{card.label}</p><h3 className="mt-2 font-display text-2xl text-[#572514]">{card.title}</h3></div>
+                <ArrowUpRight size={18} className="text-[#a7461d]" />
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="reveal px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 rounded-[1.6rem] bg-[#e8a13e] px-6 py-10 sm:px-12 sm:py-14 md:flex-row md:items-center">
+          <div>
+            <p className="font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#572514]/70">For the office · family · just because</p>
+            <h2 className="mt-4 max-w-2xl font-display text-5xl leading-[.94] text-[#572514] sm:text-6xl">Bring something good to the table.</h2>
+          </div>
+          <a href="/menu" className="inline-flex shrink-0 items-center gap-3 rounded-full bg-[#572514] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1">View the menu <ArrowUpRight size={15} /></a>
+        </div>
+      </section>
+
+      <footer className="border-t border-[#5c2f15]/15 bg-[#f3d9ac]/40 px-5 py-10 sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-8 sm:flex-row sm:items-end">
+          <div className="flex items-center gap-4">
+            <img src={markPath} alt="Pepper & Puff" className="h-16 w-16 rounded-full object-cover" />
+            <div>
+              <p className="font-display text-2xl text-[#572514]">Pepper & Puff</p>
+              <p className="mt-1 font-mono-brand text-[9px] uppercase tracking-[.18em] text-[#8b6d59]">Flavours that feel like home</p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 text-sm text-[#6f5342] sm:items-end">
+            <a href="tel:08066777994" className="font-mono-brand text-xs text-[#572514] hover:text-[#a7461d]">08066777994</a>
+            <a href="https://instagram.com/pepperandpuff" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-[#a7461d]"><Instagram size={15} /> @pepperandpuff</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+function MenuPage() {
   const [order, setOrder] = useState<Record<string, { item: MenuItem; quantity: number }>>({});
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -177,14 +398,14 @@ function Home() {
   return (
     <main id="top" className="menu-paper min-h-[100dvh] text-[#572514]">
       <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-        <a href="#top" className="flex items-center gap-3" data-testid="link-home">
+        <a href="/" className="flex items-center gap-3" data-testid="link-home">
           <img src={markPath} alt="Pepper & Puff mark" className="h-11 w-11 rounded-full object-cover shadow-sm" />
           <span className="hidden font-mono-brand text-[10px] uppercase tracking-[.17em] text-[#6f5342] sm:block">Digital menu · est. with love</span>
         </a>
         <nav className="hidden items-center gap-7 md:flex">
-          <a href="#small-chops" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-small-chops">Small chops</a>
-          <a href="#cakes" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-cakes">Cakes</a>
-          <a href="#pastries" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-pastries">Pastries</a>
+          <a href="/menu#small-chops" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-small-chops">Small chops</a>
+          <a href="/menu#cakes" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-cakes">Cakes</a>
+          <a href="/menu#pastries" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-pastries">Pastries</a>
           <button onClick={() => setDrawerOpen(true)} className="flex items-center gap-2 rounded-full bg-[#a7461d] px-4 py-2.5 font-mono-brand text-[10px] uppercase tracking-[.13em] text-[#fff6e8] transition-transform hover:-translate-y-0.5" data-testid="button-open-order">
             <ShoppingBag size={14} /> Order
           </button>
@@ -379,7 +600,8 @@ function Router() {
   return (
     <RoutedErrorBoundary>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" component={Landing} />
+        <Route path="/menu" component={MenuPage} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
