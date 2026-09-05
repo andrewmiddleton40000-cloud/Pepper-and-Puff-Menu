@@ -256,7 +256,7 @@ function Landing() {
         <div className="relative z-[1] reveal">
           <div className="mb-7 flex items-center gap-3">
             <span className="h-px w-8 bg-[#a7461d]" />
-            <span className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#a7461d]">Nigerian home-style food & bakes</span>
+            <span className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#a7461d]">Home-style food & bakes</span>
           </div>
           <h1 className="max-w-2xl font-display text-[4.4rem] leading-[.84] tracking-[-.045em] text-[#572514] sm:text-[6.8rem] lg:text-[8.2rem]">
             Made for<br /><em className="text-[#b4402b]">your people.</em>
