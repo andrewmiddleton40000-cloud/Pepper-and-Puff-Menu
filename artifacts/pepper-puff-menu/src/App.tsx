@@ -11,7 +11,6 @@ import markPath from '@assets/pepper-puff-logo-mark.png';
 import samosaPath from '@assets/food/samosa.jpg';
 import cakePath from '@assets/food/cake.jpg';
 import pastriesPath from '@assets/food/pastries.jpg';
-import jollofPath from '@assets/food/jollof.jpg';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -172,12 +171,6 @@ const foodStories: FoodStory[] = [
     title: 'Something warm for the road.',
     description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
   },
-  {
-    image: jollofPath,
-    eyebrow: 'Flavours that feel like home',
-    title: 'Come hungry. Leave happy.',
-    description: 'Nigerian comfort food and bakes, prepared with the warmth of home.',
-  },
 ];
 
 function FoodCarousel() {
@@ -286,6 +279,7 @@ function Landing() {
           </div>
         </div>
         <div className="reveal delay-2 relative mx-auto w-full max-w-[34rem]">
+          <p className="mb-3 font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#a7461d]">On the tray · small chops · cakes · pastries</p>
           <FoodCarousel />
         </div>
       </section>
