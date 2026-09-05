@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Pepper & Puff Menu"
+description = "A warm, mobile-first digital menu for Pepper & Puff, helping customers in Nigeria browse small chops, cakes, and pastries and order quickly from WhatsApp."
+version = "1.0.0"
+id = "artifacts/pepper-puff-menu"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25129
+
+[services.development]
+run = "pnpm --filter @workspace/pepper-puff-menu run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pepper-puff-menu", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/pepper-puff-menu/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25129"
+BASE_PATH = "/"
