@@ -11,6 +11,7 @@ import markPath from '@assets/pepper-puff-logo-mark.png';
 import samosaPath from '@assets/food/samosa.jpg';
 import cakePath from '@assets/food/cake.jpg';
 import pastriesPath from '@assets/food/pastries.jpg';
+import jollofPath from '@assets/food/jollof.jpg';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -147,6 +148,8 @@ function QrCode() {
 
 type FoodStory = {
   image: string;
+  alt: string;
+  objectPosition: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -155,21 +158,35 @@ type FoodStory = {
 const foodStories: FoodStory[] = [
   {
     image: samosaPath,
+    alt: 'Golden samosas arranged on a wooden tray with green pepper and dipping sauce',
+    objectPosition: 'center 52%',
     eyebrow: 'Small chops',
     title: 'The first plate always disappears first.',
     description: 'Golden samosa, puff puff and party bites made for passing around.',
   },
   {
     image: cakePath,
+    alt: 'Chocolate celebration cake topped with piped chocolate frosting and sprinkles',
+    objectPosition: 'center 54%',
     eyebrow: 'Celebration cakes',
     title: 'Make the moment a little sweeter.',
     description: 'Soft layers, generous frosting and a centrepiece worth gathering around.',
   },
   {
     image: pastriesPath,
+    alt: 'Fresh seeded and flour-dusted loaves arranged on a dark baking surface',
+    objectPosition: 'center 48%',
     eyebrow: 'Fresh pastries',
     title: 'Something warm for the road.',
     description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
+  },
+  {
+    image: jollofPath,
+    alt: 'A generous plate of seasoned rice with vegetables and fresh garnishes',
+    objectPosition: 'center 56%',
+    eyebrow: 'Flavours that feel like home',
+    title: 'Come hungry. Leave happy.',
+    description: 'Nigerian comfort food and bakes, prepared with the warmth of home.',
   },
 ];
 
@@ -194,8 +211,9 @@ function FoodCarousel() {
         <img
           key={activeStory.image}
           src={activeStory.image}
-          alt={activeStory.title}
+          alt={activeStory.alt}
           className="h-full w-full object-cover transition-opacity duration-700"
+          style={{ objectPosition: activeStory.objectPosition }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#572514]/90 via-[#572514]/10 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-6 text-[#fff6e8] sm:p-8">
@@ -309,13 +327,39 @@ function Landing() {
       <section id="favourites" className="reveal bg-[#f3d9ac]/50 px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
           {[
-            { image: samosaPath, label: 'Small chops', title: 'For sharing', href: '/menu#small-chops' },
-            { image: cakePath, label: 'Cakes', title: 'For marking the moment', href: '/menu#cakes' },
-            { image: pastriesPath, label: 'Pastries', title: 'For the road', href: '/menu#pastries' },
+            {
+              image: samosaPath,
+              alt: 'Golden samosas arranged on a wooden tray',
+              objectPosition: 'center 52%',
+              label: 'Small chops',
+              title: 'For sharing',
+              href: '/menu#small-chops',
+            },
+            {
+              image: cakePath,
+              alt: 'Chocolate celebration cake with piped frosting and chocolate drizzle',
+              objectPosition: 'center 54%',
+              label: 'Cakes',
+              title: 'For marking the moment',
+              href: '/menu#cakes',
+            },
+            {
+              image: pastriesPath,
+              alt: 'Fresh seeded and flour-dusted loaves ready to share',
+              objectPosition: 'center 48%',
+              label: 'Pastries',
+              title: 'For the road',
+              href: '/menu#pastries',
+            },
           ].map((card) => (
             <a key={card.label} href={card.href} className="group overflow-hidden rounded-[1.35rem] bg-[#fff6e8] shadow-[0_12px_28px_rgba(84,40,18,.06)]">
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={card.image} alt={card.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  style={{ objectPosition: card.objectPosition }}
+                />
               </div>
               <div className="flex items-center justify-between p-5">
                 <div><p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#75813d]">{card.label}</p><h3 className="mt-2 font-display text-2xl text-[#572514]">{card.title}</h3></div>
