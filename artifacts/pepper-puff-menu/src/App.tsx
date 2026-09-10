@@ -12,6 +12,18 @@ import samosaPath from '@assets/food/samosa.jpg';
 import cakePath from '@assets/food/cake.jpg';
 import pastriesPath from '@assets/food/pastries.jpg';
 import jollofPath from '@assets/food/jollof.jpg';
+import samosa480Path from '@assets/food/responsive/samosa-480.webp';
+import samosa768Path from '@assets/food/responsive/samosa-768.webp';
+import samosa1200Path from '@assets/food/responsive/samosa-1200.webp';
+import cake480Path from '@assets/food/responsive/cake-480.webp';
+import cake768Path from '@assets/food/responsive/cake-768.webp';
+import cake1200Path from '@assets/food/responsive/cake-1200.webp';
+import pastries480Path from '@assets/food/responsive/pastries-480.webp';
+import pastries768Path from '@assets/food/responsive/pastries-768.webp';
+import pastries1200Path from '@assets/food/responsive/pastries-1200.webp';
+import jollof480Path from '@assets/food/responsive/jollof-480.webp';
+import jollof768Path from '@assets/food/responsive/jollof-768.webp';
+import jollof1200Path from '@assets/food/responsive/jollof-1200.webp';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -191,8 +203,68 @@ function QrCode() {
   );
 }
 
+type FoodImage = {
+  fallback: string;
+  mobileSrcSet: string;
+  desktopSrcSet: string;
+};
+
+const foodImages = {
+  samosa: {
+    fallback: samosaPath,
+    mobileSrcSet: `${samosa480Path} 480w, ${samosa768Path} 768w`,
+    desktopSrcSet: `${samosa768Path} 768w, ${samosa1200Path} 1200w`,
+  },
+  cake: {
+    fallback: cakePath,
+    mobileSrcSet: `${cake480Path} 480w, ${cake768Path} 768w`,
+    desktopSrcSet: `${cake768Path} 768w, ${cake1200Path} 1200w`,
+  },
+  pastries: {
+    fallback: pastriesPath,
+    mobileSrcSet: `${pastries480Path} 480w, ${pastries768Path} 768w`,
+    desktopSrcSet: `${pastries768Path} 768w, ${pastries1200Path} 1200w`,
+  },
+  jollof: {
+    fallback: jollofPath,
+    mobileSrcSet: `${jollof480Path} 480w, ${jollof768Path} 768w`,
+    desktopSrcSet: `${jollof768Path} 768w, ${jollof1200Path} 1200w`,
+  },
+} satisfies Record<string, FoodImage>;
+
+function ResponsiveFoodImage({
+  image,
+  alt,
+  className,
+  objectPosition,
+  sizes,
+  loading = 'lazy',
+}: {
+  image: FoodImage;
+  alt: string;
+  className: string;
+  objectPosition: string;
+  sizes: string;
+  loading?: 'eager' | 'lazy';
+}) {
+  return (
+    <picture className="block h-full w-full">
+      <source media="(max-width: 639px)" type="image/webp" srcSet={image.mobileSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={image.desktopSrcSet} sizes={sizes} />
+      <img
+        src={image.fallback}
+        alt={alt}
+        loading={loading}
+        decoding="async"
+        className={className}
+        style={{ objectPosition }}
+      />
+    </picture>
+  );
+}
+
 type FoodStory = {
-  image: string;
+  image: FoodImage;
   alt: string;
   objectPosition: string;
   eyebrow: string;
@@ -202,7 +274,7 @@ type FoodStory = {
 
 const foodStories: FoodStory[] = [
   {
-    image: samosaPath,
+    image: foodImages.samosa,
     alt: 'Golden samosas arranged on a wooden tray with green pepper and dipping sauce',
     objectPosition: 'center 52%',
     eyebrow: 'Small chops',
@@ -210,7 +282,7 @@ const foodStories: FoodStory[] = [
     description: 'Golden samosa, puff puff and party bites made for passing around.',
   },
   {
-    image: cakePath,
+    image: foodImages.cake,
     alt: 'Chocolate celebration cake topped with piped chocolate frosting and sprinkles',
     objectPosition: 'center 54%',
     eyebrow: 'Celebration cakes',
@@ -218,7 +290,7 @@ const foodStories: FoodStory[] = [
     description: 'Soft layers, generous frosting and a centrepiece worth gathering around.',
   },
   {
-    image: pastriesPath,
+    image: foodImages.pastries,
     alt: 'Fresh seeded and flour-dusted loaves arranged on a dark baking surface',
     objectPosition: 'center 48%',
     eyebrow: 'Fresh pastries',
@@ -226,7 +298,7 @@ const foodStories: FoodStory[] = [
     description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
   },
   {
-    image: jollofPath,
+    image: foodImages.jollof,
     alt: 'A generous plate of seasoned rice with vegetables and fresh garnishes',
     objectPosition: 'center 56%',
     eyebrow: 'Flavours that feel like home',
@@ -253,12 +325,13 @@ function FoodCarousel() {
   return (
     <div className="relative overflow-hidden rounded-[1.8rem] border border-[#5c2f15]/15 bg-[#f3d9ac] shadow-[0_24px_60px_rgba(84,40,18,.14)]" data-testid="carousel-food-stories">
       <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/4]">
-        <img
-          key={activeStory.image}
-          src={activeStory.image}
+        <ResponsiveFoodImage
+          image={activeStory.image}
           alt={activeStory.alt}
           className="h-full w-full object-cover transition-opacity duration-700"
-          style={{ objectPosition: activeStory.objectPosition }}
+          objectPosition={activeStory.objectPosition}
+          sizes="(max-width: 639px) calc(100vw - 2.5rem), 544px"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#572514]/90 via-[#572514]/10 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-6 text-[#fff6e8] sm:p-8">
@@ -373,7 +446,7 @@ function Landing() {
         <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
           {[
             {
-              image: samosaPath,
+              image: foodImages.samosa,
               alt: 'Golden samosas arranged on a wooden tray',
               objectPosition: 'center 52%',
               label: 'Small chops',
@@ -381,7 +454,7 @@ function Landing() {
               href: '/menu#small-chops',
             },
             {
-              image: cakePath,
+              image: foodImages.cake,
               alt: 'Chocolate celebration cake with piped frosting and chocolate drizzle',
               objectPosition: 'center 54%',
               label: 'Cakes',
@@ -389,7 +462,7 @@ function Landing() {
               href: '/menu#cakes',
             },
             {
-              image: pastriesPath,
+              image: foodImages.pastries,
               alt: 'Fresh seeded and flour-dusted loaves ready to share',
               objectPosition: 'center 48%',
               label: 'Pastries',
@@ -399,11 +472,12 @@ function Landing() {
           ].map((card) => (
             <a key={card.label} href={card.href} className="group overflow-hidden rounded-[1.35rem] bg-[#fff6e8] shadow-[0_12px_28px_rgba(84,40,18,.06)]">
               <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={card.image}
+                <ResponsiveFoodImage
+                  image={card.image}
                   alt={card.alt}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  style={{ objectPosition: card.objectPosition }}
+                  objectPosition={card.objectPosition}
+                  sizes="(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1200px) 30vw, 384px"
                 />
               </div>
               <div className="flex items-center justify-between p-5">
