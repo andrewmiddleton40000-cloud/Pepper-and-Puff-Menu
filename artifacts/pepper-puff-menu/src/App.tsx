@@ -39,74 +39,47 @@ type MenuItem = {
   serving?: string;
 };
 
-const smallChops: MenuItem[] = [
-  { id: 'puff-puff', name: 'Puff Puff', description: 'Golden, airy bites with just the right touch of sweetness.', price: 2500, serving: 'Box of 20' },
-  { id: 'spring-rolls', name: 'Spring Rolls', description: 'Crisp pastry parcels filled with our savoury vegetable mix.', price: 3500, serving: 'Box of 10' },
-  { id: 'samosa', name: 'Samosa', description: 'Flaky triangles, filled generously with seasoned minced beef.', price: 3500, tag: 'Crowd favourite', serving: 'Box of 10' },
-  { id: 'chicken-skewers', name: 'Chicken Skewers', description: 'Charred, peppery chicken bites with a smoky finish.', price: 5500, serving: 'Box of 10' },
-  { id: 'small-chops-platter', name: 'Small Chops Platter', description: 'A proper spread of puff puff, spring rolls, samosa and chicken.', price: 18500, tag: 'For sharing', serving: 'Feeds 6–8' },
-  { id: 'party-tray', name: 'Party Tray', description: 'The generous one: enough little bites to keep the room moving.', price: 32000, tag: 'Best for parties', serving: 'Feeds 12–15' },
-];
-
-const cakes: MenuItem[] = [
-  { id: 'vanilla-cake', name: 'Classic Vanilla', description: 'Soft vanilla sponge, whipped buttercream and a clean finish.', price: 18000, serving: '6 inch' },
-  { id: 'red-velvet', name: 'Red Velvet', description: 'Tender cocoa sponge with a velvet cream cheese frosting.', price: 22000, tag: 'Signature', serving: '6 inch' },
-  { id: 'chocolate-cake', name: 'Chocolate Fudge', description: 'Deep chocolate layers, glossy ganache and no holding back.', price: 25000, serving: '6 inch' },
-  { id: 'celebration-cake', name: 'Celebration Cake', description: 'A dressed-up centrepiece made to match your special day.', price: 38000, tag: 'Made to order', serving: '8 inch' },
-  { id: 'cupcakes', name: 'Party Cupcakes', description: 'Fluffy little cakes, swirled and finished in your chosen colours.', price: 16000, serving: 'Box of 12' },
-  { id: 'banana-bread', name: 'Banana Bread', description: 'Moist, warmly spiced and lovely with a cup of tea.', price: 9000, serving: 'Loaf' },
-];
-
-const pastries: MenuItem[] = [
-  { id: 'meat-pie', name: 'Meat Pie', description: 'Buttery shortcrust packed with minced beef, potato and carrot.', price: 1200, tag: 'Always ready', serving: 'Each' },
-  { id: 'chicken-pie', name: 'Chicken Pie', description: 'Flaky, golden pastry wrapped around tender peppered chicken.', price: 1500, serving: 'Each' },
-  { id: 'sausage-roll', name: 'Sausage Roll', description: 'Seasoned sausage in a crisp, comforting pastry blanket.', price: 1000, serving: 'Each' },
-  { id: 'doughnut', name: 'Sugar Doughnut', description: 'Pillowy, freshly fried and rolled in fine sugar.', price: 800, serving: 'Each' },
-  { id: 'cinnamon-roll', name: 'Cinnamon Roll', description: 'Soft spirals with brown sugar, cinnamon and a light glaze.', price: 2500, serving: 'Each' },
-  { id: 'breakfast-box', name: 'Breakfast Box', description: 'Two meat pies, two sausage rolls, doughnuts and a little joy.', price: 8500, tag: 'Office hero', serving: 'Box of 6' },
-];
-
 const platters: MenuItem[] = [
   { id: 'solo-platter', name: 'Solo Platter', description: '5 Samosa\n5 Spring Rolls\n20 Puff Puff\n15 Mosa\n5 Peppered Beef', price: 11000, serving: 'A little bit of everything' },
   { id: 'jolly-platter', name: 'Jolly Platter', description: '5 Samosa\n5 Spring Rolls\n20 Puff Puff\n20 Mosa\n5 Grilled Chicken\n5 Peppered Meat\n5 Peppered Gizzards', price: 15000, serving: 'Made for sharing' },
-  { id: 'classic-platter', name: 'Classic Platter', description: '5 Samosa\n5 Spring Rolls\n20 Puff Puff\n20 Mosa\n5 Corndog\n5 Grilled Chicken\n5 Peppered Meat\n5 Peppered Gizzards', price: 20000, tag: 'Best seller', serving: 'The full spread' },
-  { id: 'delight-platter', name: 'Delight Platter', description: '5 Samosa\n5 Spring Rolls\n3 Corndog\n30 Puff Puff\n20 Mosa\n5 Grilled Turkey', price: 30000, tag: 'For celebrations', serving: 'A generous table' },
+  { id: 'classic-platter', name: 'Classic Platter', description: '5 Samosa\n5 Spring Rolls\n20 Puff Puff\n20 Mosa\n5 Corn Dogs\n5 Grilled Chicken\n5 Peppered Meat\n5 Peppered Gizzards', price: 20000, tag: 'Best seller', serving: 'The full spread' },
+  { id: 'delight-platter', name: 'Delight Platter', description: '5 Samosa\n5 Spring Rolls\n3 Corn Dogs\n30 Puff Puff\n20 Mosa\n5 Grilled Turkey', price: 30000, tag: 'For celebrations', serving: 'A generous table' },
 ];
 
 const mealPackages: MenuItem[] = [
-  { id: 'breakfast-platter', name: 'Breakfast', description: 'Pancakes or waffles\nSandwich: egg mayo, chicken, turkey or vegetable\nJuice\nFruit\nWater\n2 Chicken', price: 25000, serving: 'A proper breakfast spread' },
-  { id: 'lunch-package', name: 'Lunch', description: 'Jollof or fried rice\nSalad or coleslaw\nChicken, beef, fish or turkey\nSmall chops: 5 Samosa, 5 Spring Rolls, 20 Puff Puff\nJuice\nWater\nFruit', price: 35000, priceLabel: '₦35,000–₦40,000', serving: 'Choice of protein' },
-  { id: 'lunch-package-two', name: 'Lunch 2', description: 'Grilled chicken or fish\nChips: yam or sweet potato\nSalad\nWine\nWater\nFruit', price: 30000, priceLabel: '₦30,000–₦35,000', serving: 'Grilled and generous' },
-  { id: 'executive-breakfast-platter', name: 'Executive Breakfast Platter', description: 'Sausage, doughnut or cupcake\nSmall chops or meat pie\nChicken\nTea condiments or coffee\nWater', price: 6000, tag: 'MOQ 15', serving: 'Minimum order: 15' },
-  { id: 'executive-lunch-platter', name: 'Executive Lunch Platter', description: 'Jollof or fried rice\nSalad\nChicken, beef or fish\nWater\nSoft drink\nFruit', price: 9000, tag: 'MOQ 15', serving: 'Minimum order: 15' },
-  { id: 'birthday-regular', name: 'Birthday Regular', description: '6-inch, 1-layer cake\nSmall chops: 5 Samosa, 5 Spring Rolls, 20 Puff Puff, 3 Chicken\nJuice\nFruit\nBiscuits\nWater', price: 35000, tag: 'Birthday', serving: 'Ready to celebrate' },
+  { id: 'breakfast-platter', name: 'Breakfast', description: 'Pancakes / Waffles\nSandwich (Egg Mayo, Chicken, Turkey, Vegetable)\nJuice\nFruit\nWater\n2 Chicken', price: 25000, serving: 'A proper breakfast spread' },
+  { id: 'lunch-package', name: 'Lunch', description: 'Jollof Rice / Fried Rice\nSalad / Coleslaw\nChicken / Beef / Fish / Turkey\nSmall Chops (5 Samosa / 5 Spring Rolls / 20 Puff Puff)\nJuice\nWater\nFruit', price: 35000, priceLabel: '₦35,000–₦40,000', serving: 'Choice of protein' },
+  { id: 'lunch-package-two', name: 'Lunch 2', description: 'Grilled Chicken / Fish\nChips (Yam or Sweet Potato)\nSalad\nWine\nWater\nFruit', price: 30000, priceLabel: '₦30,000–₦35,000', serving: 'Grilled and generous' },
+  { id: 'executive-breakfast-platter', name: 'Executive Breakfast Platter', description: 'Sausage / Doughnut / Cupcake\nSmall Chops / Meat Pie\nChicken\nTea Condiments / Coffee\nWater', price: 6000, tag: 'MOQ: 15', serving: 'Minimum order: 15' },
+  { id: 'executive-lunch-platter', name: 'Executive Lunch Platter', description: 'Jollof Rice / Fried Rice\nSalad\nChicken / Beef / Fish\nWater\nSoft Drink\nFruit', price: 9000, tag: 'MOQ: 15', serving: 'Minimum order: 15' },
+  { id: 'birthday-regular', name: 'Birthday Regular', description: '6-inch Cake, 1 Layer\nSmall Chops (5 Samosa, 5 Spring Rolls, 20 Puff Puff, 3 Chicken)\nJuice\nFruit\nBiscuits\nWater', price: 35000, tag: 'Birthday', serving: 'Ready to celebrate' },
 ];
 
 const extras: MenuItem[] = [
-  { id: 'rice-and-chicken', name: 'Jollof Rice or Fried Rice & Chicken', description: 'A full serving of rice with chicken.', price: 5000, serving: 'Per serving' },
-  { id: 'extra-meat-pie', name: 'Meat Pie', description: 'Buttery shortcrust packed with seasoned beef.', price: 1500, serving: 'Each' },
-  { id: 'extra-chicken-pie', name: 'Chicken Pie', description: 'Flaky pastry filled with tender peppered chicken.', price: 1800, serving: 'Each' },
-  { id: 'full-chicken-lap', name: 'Chicken Lap — Full', description: 'A full, generously seasoned chicken lap.', price: 3000, serving: 'Each' },
-  { id: 'half-chicken-lap', name: 'Chicken Lap — Half', description: 'Half a generously seasoned chicken lap.', price: 1500, serving: 'Each' },
-  { id: 'turkey-wings', name: 'Turkey Wings', description: 'Peppered and ready for the table.', price: 5000, serving: 'Each' },
-  { id: 'extra-beef', name: 'Beef', description: 'Peppered beef for adding to any order.', price: 1500, serving: 'Serving' },
-  { id: 'plantain', name: 'Plantain', description: 'Golden, sweet and softly caramelised.', price: 2000, serving: 'Serving' },
-  { id: 'mini-fish', name: 'Mini Fish', description: 'A crisp, seasoned fish portion.', price: 4000, serving: 'Each' },
-  { id: 'extra-sausage', name: 'Sausage', description: 'Seasoned sausage, ready to add on.', price: 1200, serving: 'Each' },
-  { id: 'extra-cupcake', name: 'Cupcake', description: 'A soft cupcake finished with frosting.', price: 1500, serving: 'Each' },
-  { id: 'extra-doughnut', name: 'Doughnut', description: 'Fresh, pillowy and lightly sweet.', price: 1200, serving: 'Each' },
-  { id: 'extra-juice', name: 'Juice', description: 'Add a refreshing juice to your order.', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
-  { id: 'extra-wine', name: 'Wine', description: 'Add a bottle for the table.', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
-  { id: 'extra-fruit', name: 'Fruit', description: 'Fresh fruit to finish the spread.', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
-  { id: 'extra-chocolate', name: 'Chocolate', description: 'A little something sweet for the table.', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
+  { id: 'rice-and-chicken', name: 'Jollof Rice / Fried Rice and Chicken', description: '', price: 5000, serving: 'Per serving' },
+  { id: 'extra-meat-pie', name: 'Meat Pie', description: '', price: 1500, serving: 'Each' },
+  { id: 'extra-chicken-pie', name: 'Chicken Pie', description: '', price: 1800, serving: 'Each' },
+  { id: 'full-chicken-lap', name: 'Chicken Lap, Full', description: '', price: 3000, serving: 'Each' },
+  { id: 'half-chicken-lap', name: 'Chicken Lap, Half', description: '', price: 1500, serving: 'Each' },
+  { id: 'turkey-wings', name: 'Turkey Wings', description: '', price: 5000, serving: 'Each' },
+  { id: 'extra-beef', name: 'Beef', description: '', price: 1500, serving: 'Serving' },
+  { id: 'plantain', name: 'Plantain', description: '', price: 2000, serving: 'Serving' },
+  { id: 'fish-mini', name: 'Fish Mini', description: '', price: 4000, serving: 'Each' },
+  { id: 'extra-sausage', name: 'Sausage', description: '', price: 1200, serving: 'Each' },
+  { id: 'extra-cupcake', name: 'Cupcake', description: '', price: 1500, serving: 'Each' },
+  { id: 'extra-doughnut', name: 'Doughnut', description: '', price: 1200, serving: 'Each' },
+  { id: 'extra-juice', name: 'Juice', description: '', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
+  { id: 'extra-wine', name: 'Wine', description: '', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
+  { id: 'extra-fruit', name: 'Fruit', description: '', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
+  { id: 'extra-chocolate', name: 'Chocolate', description: '', price: 0, priceLabel: 'Ask us', serving: 'Price on request' },
 ];
 
 const pepperPackages: MenuItem[] = [
-  { id: 'peppered-puff-puff', name: 'Peppered Puff Puff', description: '30 pieces of our peppered puff puff.', price: 6000, tag: 'Our Pepper Package', serving: '30 pieces' },
+  { id: 'pepper-package', name: 'Pepper Package', description: 'Peppered Puff Puff — 30 pcs', price: 6000, tag: 'Our Pepper Package', serving: '30 pieces' },
   { id: 'pepper-petite', name: 'Petite', description: '1 Samosa\n1 Spring Roll\n4 Puff Puff\n1 Beef', price: 2000, serving: 'A petite bite box' },
   { id: 'pepper-basic', name: 'Basic', description: '1 Samosa\n1 Spring Roll\n4 Puff Puff\n3 Mosa\n1 Chicken', price: 3000, serving: 'A simple crowd-pleaser' },
-  { id: 'pepper-classic', name: 'Classic', description: '1 Samosa\n1 Spring Roll\n4 Puff Puff\n3 Mosa\n1 Gizzard or Beef\n1 Chicken', price: 3500, serving: 'The classic mix' },
-  { id: 'pepper-delight', name: 'Delight', description: '1 Samosa\n1 Spring Roll\n1 Corndog\n5 Puff Puff\n4 Mosa\n1 Gizzard\n1 Beef\n1 Chicken', price: 5000, serving: 'The full Pepper mix' },
+  { id: 'pepper-classic', name: 'Classic', description: '1 Samosa\n1 Spring Roll\n4 Puff Puff\n3 Mosa\n1 Gizzard / Beef\n1 Chicken', price: 3500, serving: 'The classic mix' },
+  { id: 'pepper-delight', name: 'Delight', description: '1 Samosa\n1 Spring Roll\n1 Corn Dog\n5 Puff Puff\n4 Mosa\n1 Gizzard\n1 Beef\n1 Chicken', price: 5000, serving: 'The full Pepper mix' },
 ];
 
 const formatNaira = (value: number) => `₦${value.toLocaleString('en-NG')}`;
@@ -140,7 +113,7 @@ function MenuItemRow({ item, onAdd }: { item: MenuItem; onAdd: (item: MenuItem) 
           <h3 className="font-display text-[1.35rem] leading-tight text-[#572514]">{item.name}</h3>
           {item.tag && <span className="font-mono-brand text-[9px] uppercase tracking-[.14em] text-[#75813d]">{item.tag}</span>}
         </div>
-        <p className="mt-1 max-w-xl whitespace-pre-line text-sm leading-relaxed text-[#6f5342]">{item.description}</p>
+        {item.description && <p className="mt-1 max-w-xl whitespace-pre-line text-sm leading-relaxed text-[#6f5342]">{item.description}</p>}
         <p className="mt-2 font-mono-brand text-[10px] uppercase tracking-[.13em] text-[#a18b78]">{item.serving}</p>
       </div>
       <div className="flex shrink-0 flex-col items-end justify-between gap-3">
@@ -398,7 +371,7 @@ function Landing() {
             Made for<br /><em className="text-[#b4402b]">your people.</em>
           </h1>
           <p className="mt-8 max-w-md text-base leading-7 text-[#6f5342] sm:text-lg">
-            Small chops, celebration cakes and warm pastries for the table, the office, and every “just one more” moment.
+            Platters, breakfast and lunch spreads, birthday packages and peppered bites for the table, the office, and every “just one more” moment.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a href="/menu" className="inline-flex items-center gap-3 rounded-full bg-[#a7461d] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
@@ -415,7 +388,7 @@ function Landing() {
           </div>
         </div>
         <div className="reveal delay-2 relative mx-auto w-full max-w-[34rem]">
-          <p className="mb-3 font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#a7461d]">On the tray · small chops · cakes · pastries</p>
+          <p className="mb-3 font-mono-brand text-[10px] uppercase tracking-[.22em] text-[#a7461d]">On the tray · platters · breakfast · lunch</p>
           <FoodCarousel />
         </div>
       </section>
@@ -424,7 +397,7 @@ function Landing() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
           <p className="font-display text-xl">For the first bite, the last bite, and everything in between.</p>
           <div className="flex flex-wrap gap-x-7 gap-y-2 font-mono-brand text-[9px] uppercase tracking-[.18em] text-[#f5d6a7]">
-            <span>Small chops</span><span className="text-[#e68a32]">•</span><span>Celebration cakes</span><span className="text-[#e68a32]">•</span><span>Fresh pastries</span>
+            <span>Platters</span><span className="text-[#e68a32]">•</span><span>Meal packages</span><span className="text-[#e68a32]">•</span><span>Pepper package</span>
           </div>
         </div>
       </section>
@@ -449,25 +422,25 @@ function Landing() {
               image: foodImages.samosa,
               alt: 'Golden samosas arranged on a wooden tray',
               objectPosition: 'center 52%',
-              label: 'Small chops',
+              label: 'Platters',
               title: 'For sharing',
-              href: '/menu#small-chops',
+              href: '/menu#platters',
             },
             {
               image: foodImages.cake,
               alt: 'Chocolate celebration cake with piped frosting and chocolate drizzle',
               objectPosition: 'center 54%',
-              label: 'Cakes',
+              label: 'Meal packages',
               title: 'For marking the moment',
-              href: '/menu#cakes',
+              href: '/menu#meal-plans',
             },
             {
               image: foodImages.pastries,
               alt: 'Fresh seeded and flour-dusted loaves ready to share',
               objectPosition: 'center 48%',
-              label: 'Pastries',
+              label: 'Extras',
               title: 'For the road',
-              href: '/menu#pastries',
+              href: '/menu#extras',
             },
           ].map((card) => (
             <a key={card.label} href={card.href} className="group overflow-hidden rounded-[1.35rem] bg-[#fff6e8] shadow-[0_12px_28px_rgba(84,40,18,.06)]">
@@ -561,9 +534,9 @@ function MenuPage() {
         </a>
         <nav className="hidden items-center gap-7 md:flex">
           <a href="/menu#platters" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-platters">Platters</a>
-          <a href="/menu#small-chops" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-small-chops">Small chops</a>
-          <a href="/menu#cakes" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-cakes">Cakes</a>
-          <a href="/menu#pastries" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-pastries">Pastries</a>
+          <a href="/menu#meal-plans" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-meal-plans">Breakfast & lunch</a>
+          <a href="/menu#extras" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-extras">Extras</a>
+          <a href="/menu#pepper-package" className="font-mono-brand text-[10px] uppercase tracking-[.16em] text-[#6f5342] hover:text-[#a7461d]" data-testid="link-pepper-package">Pepper package</a>
           <button onClick={() => setDrawerOpen(true)} className="flex items-center gap-2 rounded-full bg-[#a7461d] px-4 py-2.5 font-mono-brand text-[10px] uppercase tracking-[.13em] text-[#fff6e8] transition-transform hover:-translate-y-0.5" data-testid="button-open-order">
             <ShoppingBag size={14} /> Order
           </button>
@@ -582,10 +555,10 @@ function MenuPage() {
             Flavours<br /><em className="text-[#b4402b]">that feel</em><br />like home.
           </h1>
           <p className="mt-8 max-w-md text-base leading-7 text-[#6f5342] sm:text-lg">
-            Nigerian home-style food, bakes and small chops made for the table, the office, and every “just one more” moment.
+            Platters, breakfast and lunch spreads, birthday packages and peppered bites made for the table, the office, and every “just one more” moment.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a href="#small-chops" className="inline-flex items-center gap-3 rounded-full bg-[#a7461d] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
+            <a href="#platters" className="inline-flex items-center gap-3 rounded-full bg-[#a7461d] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
               Browse the menu <ChevronRight size={15} />
             </a>
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#a7461d]/40 px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#a7461d] transition-colors hover:bg-[#a7461d]/10" data-testid="link-whatsapp-hero">
@@ -609,7 +582,7 @@ function MenuPage() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
           <p className="font-display text-xl">For the first bite, the last bite, and everything in between.</p>
           <div className="flex flex-wrap gap-x-7 gap-y-2 font-mono-brand text-[9px] uppercase tracking-[.18em] text-[#f5d6a7]">
-            <span>Small chops</span><span className="text-[#e68a32]">•</span><span>Celebration cakes</span><span className="text-[#e68a32]">•</span><span>Fresh pastries</span>
+            <span>Platters</span><span className="text-[#e68a32]">•</span><span>Meal packages</span><span className="text-[#e68a32]">•</span><span>Pepper package</span>
           </div>
         </div>
       </section>
@@ -630,15 +603,15 @@ function MenuPage() {
               <h3 className="relative mt-20 max-w-[12rem] font-display text-3xl leading-none text-[#572514]">Platters for every table</h3>
               <span className="relative mt-5 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#572514]">See platters <ArrowUpRight size={14} /></span>
             </a>
-            <a href="#cakes" className="group min-h-64 rounded-[1.35rem] bg-[#b4402b] p-6 text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="card-highlight-cake">
-              <p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#f5d6a7]">Sweet thing</p>
-              <h3 className="mt-20 max-w-[10rem] font-display text-3xl leading-none">A cake for your people</h3>
-              <span className="mt-5 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#f5d6a7]">Explore cakes <ArrowUpRight size={14} /></span>
+            <a href="#meal-plans" className="group min-h-64 rounded-[1.35rem] bg-[#b4402b] p-6 text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="card-highlight-cake">
+              <p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#f5d6a7]">Full spreads</p>
+              <h3 className="mt-20 max-w-[10rem] font-display text-3xl leading-none">Breakfast, lunch & birthdays</h3>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#f5d6a7]">Explore packages <ArrowUpRight size={14} /></span>
             </a>
-            <a href="#pastries" className="group min-h-64 rounded-[1.35rem] border border-[#5c2f15]/20 bg-[#75813d] p-6 text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="card-highlight-pastry">
-              <p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#e5e5bb]">Fresh from the oven</p>
-              <h3 className="mt-20 max-w-[10rem] font-display text-3xl leading-none">Pastries for the road</h3>
-              <span className="mt-5 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#e5e5bb]">See pastries <ArrowUpRight size={14} /></span>
+            <a href="#extras" className="group min-h-64 rounded-[1.35rem] border border-[#5c2f15]/20 bg-[#75813d] p-6 text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="card-highlight-pastry">
+              <p className="font-mono-brand text-[10px] uppercase tracking-[.18em] text-[#e5e5bb]">Add a little more</p>
+              <h3 className="mt-20 max-w-[10rem] font-display text-3xl leading-none">Extras for the table</h3>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#e5e5bb]">See extras <ArrowUpRight size={14} /></span>
             </a>
           </div>
         </div>
@@ -650,9 +623,6 @@ function MenuPage() {
           ['meal-plans', '02 · Breakfast & lunch'],
           ['extras', '03 · Extras'],
           ['pepper-package', '04 · Our Pepper package'],
-          ['small-chops', '05 · Small chops'],
-          ['cakes', '06 · Cakes'],
-          ['pastries', '07 · Pastries'],
         ].map(([id, label]) => (
           <a key={id} href={`#${id}`} className="shrink-0 rounded-full border border-[#5c2f15]/20 bg-[#fff6e8]/50 px-4 py-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#6f5342] transition-colors hover:border-[#a7461d] hover:text-[#a7461d]" data-testid={`link-category-${id}`}>{label}</a>
         ))}
@@ -665,12 +635,6 @@ function MenuPage() {
       <CategorySection id="extras" eyebrow="03 / Add a little more" title="Extras for the table." note="Build out your order with rice, protein, pastries, drinks and something sweet. Items without a listed price are available on request." items={extras} accent="#75813d" onAdd={addItem} />
       <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
       <CategorySection id="pepper-package" eyebrow="04 / Our Pepper package" title="Small bites, Pepper style." note="Choose a neat little box of samosa, spring roll, puff puff, mosa and your favourite peppered extras." items={pepperPackages} accent="#e68a32" onAdd={addItem} />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="small-chops" eyebrow="05 / Gather round" title="Small chops, big welcome." note="The tray arrives and somehow everyone is already standing around it. Order by the box or build a spread for the whole room." items={smallChops} accent="#a7461d" onAdd={addItem} />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="cakes" eyebrow="06 / Mark the moment" title="A little extra sweetness." note="Birthday, promotion, naming ceremony or simply Saturday. Tell us the story and we will make the centrepiece." items={cakes} accent="#b4402b" onAdd={addItem} />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="pastries" eyebrow="07 / From the oven" title="Pastries with a point of view." note="Buttery edges, generous fillings and the kind of golden finish that makes a quick snack feel like a proper break." items={pastries} accent="#75813d" onAdd={addItem} />
 
       <section className="reveal mx-5 my-14 overflow-hidden rounded-[1.6rem] bg-[#e8a13e] sm:mx-8 lg:my-24">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 py-10 sm:px-12 sm:py-14 lg:grid-cols-[1fr_auto]">
