@@ -24,6 +24,26 @@ import pastries1200Path from '@assets/food/responsive/pastries-1200.webp';
 import jollof480Path from '@assets/food/responsive/jollof-480.webp';
 import jollof768Path from '@assets/food/responsive/jollof-768.webp';
 import jollof1200Path from '@assets/food/responsive/jollof-1200.webp';
+import partyGrillPlatterPath from '@assets/food/carousel/party-grill-platter.jpg';
+import partyGrillPlatter480Path from '@assets/food/carousel/responsive/party-grill-platter-480.webp';
+import partyGrillPlatter768Path from '@assets/food/carousel/responsive/party-grill-platter-768.webp';
+import partyGrillPlatter1200Path from '@assets/food/carousel/responsive/party-grill-platter-1200.webp';
+import classicSmallChopsPath from '@assets/food/carousel/classic-small-chops.jpg';
+import classicSmallChops480Path from '@assets/food/carousel/responsive/classic-small-chops-480.webp';
+import classicSmallChops768Path from '@assets/food/carousel/responsive/classic-small-chops-768.webp';
+import classicSmallChops1200Path from '@assets/food/carousel/responsive/classic-small-chops-1200.webp';
+import pepperedSmallChopsPath from '@assets/food/carousel/peppered-small-chops.jpg';
+import pepperedSmallChops480Path from '@assets/food/carousel/responsive/peppered-small-chops-480.webp';
+import pepperedSmallChops768Path from '@assets/food/carousel/responsive/peppered-small-chops-768.webp';
+import pepperedSmallChops1200Path from '@assets/food/carousel/responsive/peppered-small-chops-1200.webp';
+import celebrationFeastPath from '@assets/food/carousel/celebration-feast.jpg';
+import celebrationFeast480Path from '@assets/food/carousel/responsive/celebration-feast-480.webp';
+import celebrationFeast768Path from '@assets/food/carousel/responsive/celebration-feast-768.webp';
+import celebrationFeast1200Path from '@assets/food/carousel/responsive/celebration-feast-1200.webp';
+import strawberryCakePath from '@assets/food/carousel/strawberry-chocolate-cake.jpg';
+import strawberryCake480Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-480.webp';
+import strawberryCake768Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-768.webp';
+import strawberryCake1200Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-1200.webp';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -205,6 +225,34 @@ const foodImages = {
   },
 } satisfies Record<string, FoodImage>;
 
+const carouselImages = {
+  partyGrill: {
+    fallback: partyGrillPlatterPath,
+    mobileSrcSet: `${partyGrillPlatter480Path} 480w, ${partyGrillPlatter768Path} 768w`,
+    desktopSrcSet: `${partyGrillPlatter768Path} 768w, ${partyGrillPlatter1200Path} 1200w`,
+  },
+  classicSmallChops: {
+    fallback: classicSmallChopsPath,
+    mobileSrcSet: `${classicSmallChops480Path} 480w, ${classicSmallChops768Path} 768w`,
+    desktopSrcSet: `${classicSmallChops768Path} 768w, ${classicSmallChops1200Path} 1200w`,
+  },
+  pepperedSmallChops: {
+    fallback: pepperedSmallChopsPath,
+    mobileSrcSet: `${pepperedSmallChops480Path} 480w, ${pepperedSmallChops768Path} 768w`,
+    desktopSrcSet: `${pepperedSmallChops768Path} 768w, ${pepperedSmallChops1200Path} 1200w`,
+  },
+  celebrationFeast: {
+    fallback: celebrationFeastPath,
+    mobileSrcSet: `${celebrationFeast480Path} 480w, ${celebrationFeast768Path} 768w`,
+    desktopSrcSet: `${celebrationFeast768Path} 768w, ${celebrationFeast1200Path} 1200w`,
+  },
+  strawberryCake: {
+    fallback: strawberryCakePath,
+    mobileSrcSet: `${strawberryCake480Path} 480w, ${strawberryCake768Path} 768w`,
+    desktopSrcSet: `${strawberryCake768Path} 768w, ${strawberryCake1200Path} 1200w`,
+  },
+} satisfies Record<string, FoodImage>;
+
 function ResponsiveFoodImage({
   image,
   alt,
@@ -247,36 +295,44 @@ type FoodStory = {
 
 const foodStories: FoodStory[] = [
   {
-    image: foodImages.samosa,
-    alt: 'Golden samosas arranged on a wooden tray with green pepper and dipping sauce',
+    image: carouselImages.partyGrill,
+    alt: 'Party platter with glazed ribs, grilled chicken, wraps, fries, corn and skewers',
+    objectPosition: 'center 50%',
+    eyebrow: 'Party platters',
+    title: 'A full spread, ready to share.',
+    description: 'Grilled favourites, crisp sides and generous bites gathered onto one table-ready platter.',
+  },
+  {
+    image: carouselImages.classicSmallChops,
+    alt: 'Small chops platter with puff puff, samosas, spring rolls, grilled chicken and peppered meat',
     objectPosition: 'center 52%',
-    eyebrow: 'Small chops',
-    title: 'The first plate always disappears first.',
-    description: 'Golden samosa, puff puff and party bites made for passing around.',
+    eyebrow: 'Classic small chops',
+    title: 'The first tray always disappears first.',
+    description: 'Golden puff puff, crisp rolls and smoky grilled favourites made for passing around.',
   },
   {
-    image: foodImages.cake,
-    alt: 'Chocolate celebration cake topped with piped chocolate frosting and sprinkles',
-    objectPosition: 'center 54%',
-    eyebrow: 'Celebration cakes',
-    title: 'Make the moment a little sweeter.',
-    description: 'Soft layers, generous frosting and a centrepiece worth gathering around.',
+    image: carouselImages.pepperedSmallChops,
+    alt: 'Peppered small chops tray with spring rolls, samosas, puff puff, plantain and assorted meats',
+    objectPosition: 'center 50%',
+    eyebrow: 'Pepper package',
+    title: 'Golden bites with a proper kick.',
+    description: 'Crisp small chops, sweet plantain and peppered proteins packed for the whole crew.',
   },
   {
-    image: foodImages.pastries,
-    alt: 'Fresh seeded and flour-dusted loaves arranged on a dark baking surface',
+    image: carouselImages.celebrationFeast,
+    alt: 'Celebration tray filled with jollof rice, fried rice, chicken, plantain, puff puff and pastries',
     objectPosition: 'center 48%',
-    eyebrow: 'Fresh pastries',
-    title: 'Something warm for the road.',
-    description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
-  },
-  {
-    image: foodImages.jollof,
-    alt: 'A generous plate of seasoned rice with vegetables and fresh garnishes',
-    objectPosition: 'center 56%',
     eyebrow: 'Flavours that feel like home',
     title: 'Come hungry. Leave happy.',
-    description: 'Nigerian comfort food and bakes, prepared with the warmth of home.',
+    description: 'Rice, grilled chicken, plantain and small chops brought together for a generous feast.',
+  },
+  {
+    image: carouselImages.strawberryCake,
+    alt: 'Strawberry celebration cake with chocolate drip, fresh berries and piped cream',
+    objectPosition: 'center 45%',
+    eyebrow: 'Celebration cakes',
+    title: 'Make the moment a little sweeter.',
+    description: 'Soft layers, fresh berries and a show-stopping finish worth gathering around.',
   },
 ];
 
