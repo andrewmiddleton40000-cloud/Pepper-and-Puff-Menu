@@ -24,6 +24,26 @@ import pastries1200Path from '@assets/food/responsive/pastries-1200.webp';
 import jollof480Path from '@assets/food/responsive/jollof-480.webp';
 import jollof768Path from '@assets/food/responsive/jollof-768.webp';
 import jollof1200Path from '@assets/food/responsive/jollof-1200.webp';
+import partyGrillPlatterPath from '@assets/food/carousel/party-grill-platter.jpg';
+import partyGrillPlatter480Path from '@assets/food/carousel/responsive/party-grill-platter-480.webp';
+import partyGrillPlatter768Path from '@assets/food/carousel/responsive/party-grill-platter-768.webp';
+import partyGrillPlatter1200Path from '@assets/food/carousel/responsive/party-grill-platter-1200.webp';
+import classicSmallChopsPath from '@assets/food/carousel/classic-small-chops.jpg';
+import classicSmallChops480Path from '@assets/food/carousel/responsive/classic-small-chops-480.webp';
+import classicSmallChops768Path from '@assets/food/carousel/responsive/classic-small-chops-768.webp';
+import classicSmallChops1200Path from '@assets/food/carousel/responsive/classic-small-chops-1200.webp';
+import pepperedSmallChopsPath from '@assets/food/carousel/peppered-small-chops.jpg';
+import pepperedSmallChops480Path from '@assets/food/carousel/responsive/peppered-small-chops-480.webp';
+import pepperedSmallChops768Path from '@assets/food/carousel/responsive/peppered-small-chops-768.webp';
+import pepperedSmallChops1200Path from '@assets/food/carousel/responsive/peppered-small-chops-1200.webp';
+import celebrationFeastPath from '@assets/food/carousel/celebration-feast.jpg';
+import celebrationFeast480Path from '@assets/food/carousel/responsive/celebration-feast-480.webp';
+import celebrationFeast768Path from '@assets/food/carousel/responsive/celebration-feast-768.webp';
+import celebrationFeast1200Path from '@assets/food/carousel/responsive/celebration-feast-1200.webp';
+import strawberryCakePath from '@assets/food/carousel/strawberry-chocolate-cake.jpg';
+import strawberryCake480Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-480.webp';
+import strawberryCake768Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-768.webp';
+import strawberryCake1200Path from '@assets/food/carousel/responsive/strawberry-chocolate-cake-1200.webp';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -104,21 +124,20 @@ function useReveal() {
 
 function MenuItemRow({ item, onAdd }: { item: MenuItem; onAdd: (item: MenuItem) => void }) {
   return (
-    <article className="group relative flex gap-4 border-b border-[#5c2f15]/15 py-5 first:pt-1 last:border-0 sm:gap-6" data-testid={`card-menu-item-${item.id}`}>
-      <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#c45a20]/40 font-mono-brand text-[10px] text-[#a7461d] transition-colors group-hover:bg-[#c45a20] group-hover:text-[#fff6e8]">
-        {String(item.name.charCodeAt(0)).slice(-2)}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="font-display text-[1.35rem] leading-tight text-[#572514]">{item.name}</h3>
-          {item.tag && <span className="font-mono-brand text-[9px] uppercase tracking-[.14em] text-[#75813d]">{item.tag}</span>}
+    <article className="menu-item-card group relative flex min-w-0 flex-col overflow-hidden rounded-[1.65rem] border border-[#bb6a2d]/25 bg-[#fffaf0] p-5 shadow-[0_10px_28px_rgba(83,42,17,.07)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-[#d76720]/55 hover:shadow-[0_18px_38px_rgba(83,42,17,.13)] sm:p-6" data-testid={`card-menu-item-${item.id}`}>
+      <div className="absolute -right-9 -top-10 h-24 w-24 rounded-full border-[18px] border-[#efb25e]/15 transition-transform duration-500 group-hover:scale-110" aria-hidden="true" />
+      <div className="relative flex min-w-0 items-start justify-between gap-3">
+        <div className="min-w-0 pt-1">
+          {item.tag && <span className="mb-3 inline-flex rounded-full bg-[#5b2c18] px-3 py-1 font-mono-brand text-[8px] uppercase tracking-[.14em] text-[#fff4df]">{item.tag}</span>}
+          <h3 className="break-words font-display text-[1.55rem] leading-[1.05] text-[#492313] sm:text-[1.7rem]">{item.name}</h3>
         </div>
-        {item.description && <p className="mt-1 max-w-xl whitespace-pre-line text-sm leading-relaxed text-[#6f5342]">{item.description}</p>}
-        <p className="mt-2 font-mono-brand text-[10px] uppercase tracking-[.13em] text-[#a18b78]">{item.serving}</p>
+        <span className="relative z-[1] max-w-[52%] shrink-0 rounded-bl-[1.15rem] rounded-br-md rounded-tl-md rounded-tr-[1.15rem] bg-[#dc651d] px-3 py-2 text-center font-display text-lg leading-none text-[#fffaf0] shadow-[0_4px_0_#6a3218] sm:px-4 sm:text-xl">{displayPrice(item)}</span>
       </div>
-      <div className="flex shrink-0 flex-col items-end justify-between gap-3">
-         <span className="font-display text-lg text-[#a7461d]">{displayPrice(item)}</span>
-        <button onClick={() => onAdd(item)} className="inline-flex items-center gap-1 rounded-full border border-[#c45a20]/40 px-3 py-1.5 font-mono-brand text-[10px] uppercase tracking-[.12em] text-[#a7461d] transition-all hover:bg-[#a7461d] hover:text-[#fff6e8] active:scale-95" data-testid={`button-add-${item.id}`}>
+      {item.description && <p className="relative mt-5 flex-1 whitespace-pre-line text-[13px] leading-6 text-[#6f5342]">{item.description}</p>}
+      {!item.description && <div className="min-h-5 flex-1" />}
+      <div className="relative mt-6 flex items-end justify-between gap-3 border-t border-dashed border-[#bb6a2d]/25 pt-4">
+        <p className="min-w-0 font-mono-brand text-[9px] uppercase tracking-[.11em] text-[#8c6b55]">{item.serving}</p>
+        <button onClick={() => onAdd(item)} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#5b2c18] px-4 py-2.5 font-mono-brand text-[9px] uppercase tracking-[.12em] text-[#fff6e8] transition-[transform,background-color] hover:bg-[#d45e1c] active:scale-95" data-testid={`button-add-${item.id}`}>
           <Plus size={12} strokeWidth={2.5} /> Add
         </button>
       </div>
@@ -126,20 +145,23 @@ function MenuItemRow({ item, onAdd }: { item: MenuItem; onAdd: (item: MenuItem) 
   );
 }
 
-function CategorySection({ id, eyebrow, title, note, items, accent, onAdd }: { id: string; eyebrow: string; title: string; note: string; items: MenuItem[]; accent: string; onAdd: (item: MenuItem) => void }) {
+function CategorySection({ id, eyebrow, title, note, items, accent, image, imageAlt, imagePosition, onAdd }: { id: string; eyebrow: string; title: string; note: string; items: MenuItem[]; accent: string; image: FoodImage; imageAlt: string; imagePosition: string; onAdd: (item: MenuItem) => void }) {
   return (
-    <section id={id} className="reveal scroll-mt-24 px-5 py-16 sm:px-8 lg:py-24" data-testid={`section-${id}`}>
-      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:h-fit">
-          <p className="font-mono-brand text-[10px] uppercase tracking-[.24em]" style={{ color: accent }}>{eyebrow}</p>
-          <h2 className="mt-3 max-w-sm font-display text-5xl leading-[.94] text-[#572514] sm:text-6xl">{title}</h2>
-          <p className="mt-5 max-w-xs text-sm leading-7 text-[#6f5342]">{note}</p>
-          <div className="mt-8 hidden items-center gap-3 text-[#a7461d] lg:flex">
-            <span className="h-px w-12 bg-[#a7461d]/40" />
-            <span className="font-mono-brand text-[9px] uppercase tracking-[.16em]">Swipe, choose, share</span>
+    <section id={id} className="reveal relative scroll-mt-24 px-5 py-16 sm:px-8 lg:py-24" data-testid={`section-${id}`}>
+      <div className="mx-auto max-w-7xl">
+        <div className="relative mb-10 grid overflow-hidden rounded-[2rem] bg-[#542714] text-[#fff7e9] shadow-[0_18px_44px_rgba(68,31,13,.16)] md:grid-cols-[1.15fr_.85fr] md:items-stretch">
+          <div className="relative z-[1] px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
+            <p className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#f1b15b]">{eyebrow}</p>
+            <h2 className="mt-3 max-w-2xl font-display text-4xl leading-[.95] sm:text-5xl lg:text-6xl">{title}</h2>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#f6ddc3]">{note}</p>
+            <div className="mt-7 h-1 w-20 rounded-full" style={{ backgroundColor: accent }} />
+          </div>
+          <div className="relative min-h-52 overflow-hidden md:min-h-full">
+            <ResponsiveFoodImage image={image} alt={imageAlt} className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]" objectPosition={imagePosition} sizes="(max-width: 767px) calc(100vw - 2.5rem), 42vw" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#542714]/55 via-transparent to-transparent md:block" />
           </div>
         </div>
-        <div className="rounded-[1.5rem] border border-[#5c2f15]/15 bg-[#fff6e8]/55 px-5 py-2 shadow-[0_12px_28px_rgba(84,40,18,.04)] sm:px-8">
+        <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => <MenuItemRow key={item.id} item={item} onAdd={onAdd} />)}
         </div>
       </div>
@@ -205,6 +227,34 @@ const foodImages = {
   },
 } satisfies Record<string, FoodImage>;
 
+const carouselImages = {
+  partyGrill: {
+    fallback: partyGrillPlatterPath,
+    mobileSrcSet: `${partyGrillPlatter480Path} 480w, ${partyGrillPlatter768Path} 768w`,
+    desktopSrcSet: `${partyGrillPlatter768Path} 768w, ${partyGrillPlatter1200Path} 1200w`,
+  },
+  classicSmallChops: {
+    fallback: classicSmallChopsPath,
+    mobileSrcSet: `${classicSmallChops480Path} 480w, ${classicSmallChops768Path} 768w`,
+    desktopSrcSet: `${classicSmallChops768Path} 768w, ${classicSmallChops1200Path} 1200w`,
+  },
+  pepperedSmallChops: {
+    fallback: pepperedSmallChopsPath,
+    mobileSrcSet: `${pepperedSmallChops480Path} 480w, ${pepperedSmallChops768Path} 768w`,
+    desktopSrcSet: `${pepperedSmallChops768Path} 768w, ${pepperedSmallChops1200Path} 1200w`,
+  },
+  celebrationFeast: {
+    fallback: celebrationFeastPath,
+    mobileSrcSet: `${celebrationFeast480Path} 480w, ${celebrationFeast768Path} 768w`,
+    desktopSrcSet: `${celebrationFeast768Path} 768w, ${celebrationFeast1200Path} 1200w`,
+  },
+  strawberryCake: {
+    fallback: strawberryCakePath,
+    mobileSrcSet: `${strawberryCake480Path} 480w, ${strawberryCake768Path} 768w`,
+    desktopSrcSet: `${strawberryCake768Path} 768w, ${strawberryCake1200Path} 1200w`,
+  },
+} satisfies Record<string, FoodImage>;
+
 function ResponsiveFoodImage({
   image,
   alt,
@@ -247,36 +297,44 @@ type FoodStory = {
 
 const foodStories: FoodStory[] = [
   {
-    image: foodImages.samosa,
-    alt: 'Golden samosas arranged on a wooden tray with green pepper and dipping sauce',
+    image: carouselImages.partyGrill,
+    alt: 'Party platter with glazed ribs, grilled chicken, wraps, fries, corn and skewers',
+    objectPosition: 'center 50%',
+    eyebrow: 'Party platters',
+    title: 'A full spread, ready to share.',
+    description: 'Grilled favourites, crisp sides and generous bites gathered onto one table-ready platter.',
+  },
+  {
+    image: carouselImages.classicSmallChops,
+    alt: 'Small chops platter with puff puff, samosas, spring rolls, grilled chicken and peppered meat',
     objectPosition: 'center 52%',
-    eyebrow: 'Small chops',
-    title: 'The first plate always disappears first.',
-    description: 'Golden samosa, puff puff and party bites made for passing around.',
+    eyebrow: 'Classic small chops',
+    title: 'The first tray always disappears first.',
+    description: 'Golden puff puff, crisp rolls and smoky grilled favourites made for passing around.',
   },
   {
-    image: foodImages.cake,
-    alt: 'Chocolate celebration cake topped with piped chocolate frosting and sprinkles',
-    objectPosition: 'center 54%',
-    eyebrow: 'Celebration cakes',
-    title: 'Make the moment a little sweeter.',
-    description: 'Soft layers, generous frosting and a centrepiece worth gathering around.',
+    image: carouselImages.pepperedSmallChops,
+    alt: 'Peppered small chops tray with spring rolls, samosas, puff puff, plantain and assorted meats',
+    objectPosition: 'center 50%',
+    eyebrow: 'Pepper package',
+    title: 'Golden bites with a proper kick.',
+    description: 'Crisp small chops, sweet plantain and peppered proteins packed for the whole crew.',
   },
   {
-    image: foodImages.pastries,
-    alt: 'Fresh seeded and flour-dusted loaves arranged on a dark baking surface',
+    image: carouselImages.celebrationFeast,
+    alt: 'Celebration tray filled with jollof rice, fried rice, chicken, plantain, puff puff and pastries',
     objectPosition: 'center 48%',
-    eyebrow: 'Fresh pastries',
-    title: 'Something warm for the road.',
-    description: 'Buttery bakes and golden pastries for office mornings and slow Saturdays.',
-  },
-  {
-    image: foodImages.jollof,
-    alt: 'A generous plate of seasoned rice with vegetables and fresh garnishes',
-    objectPosition: 'center 56%',
     eyebrow: 'Flavours that feel like home',
     title: 'Come hungry. Leave happy.',
-    description: 'Nigerian comfort food and bakes, prepared with the warmth of home.',
+    description: 'Rice, grilled chicken, plantain and small chops brought together for a generous feast.',
+  },
+  {
+    image: carouselImages.strawberryCake,
+    alt: 'Strawberry celebration cake with chocolate drip, fresh berries and piped cream',
+    objectPosition: 'center 45%',
+    eyebrow: 'Celebration cakes',
+    title: 'Make the moment a little sweeter.',
+    description: 'Soft layers, fresh berries and a show-stopping finish worth gathering around.',
   },
 ];
 
@@ -544,37 +602,32 @@ function MenuPage() {
         <button onClick={() => setDrawerOpen(true)} className="rounded-full border border-[#5c2f15]/20 p-2.5 md:hidden" aria-label="Open order" data-testid="button-open-order-mobile"><Menu size={18} /></button>
       </header>
 
-      <section id="top" className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 pt-8 sm:px-8 sm:pb-28 lg:grid-cols-[1.1fr_.9fr] lg:gap-16 lg:pt-16">
-        <div className="hero-orb -left-20 top-20 h-60 w-60 bg-[#e9bd72]/25" />
-        <div className="relative z-[1] reveal">
-          <div className="mb-7 flex items-center gap-3">
-            <span className="h-px w-8 bg-[#a7461d]" />
-            <span className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#a7461d]">The menu is open</span>
+      <section id="top" className="relative mx-auto max-w-7xl px-5 pb-16 pt-7 sm:px-8 sm:pb-24 lg:pt-12">
+        <div className="reveal relative isolate grid min-h-[34rem] overflow-hidden rounded-[2.25rem] bg-[#f5b14f] shadow-[0_24px_60px_rgba(84,40,18,.15)] lg:grid-cols-[1.03fr_.97fr]">
+          <div className="relative z-[2] flex flex-col justify-center px-7 py-14 sm:px-12 lg:px-16">
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-px w-9 bg-[#572514]" />
+              <span className="font-mono-brand text-[10px] uppercase tracking-[.24em] text-[#572514]">The menu is open</span>
+            </div>
+            <h1 className="font-display text-[5rem] font-bold leading-[.78] tracking-[-.06em] text-[#4d2412] sm:text-[7.5rem] lg:text-[9.5rem]">MENU</h1>
+            <p className="mt-8 max-w-md text-base leading-7 text-[#63371f] sm:text-lg">
+              Platters, breakfast and lunch spreads, birthday packages and peppered bites made for the table, the office, and every “just one more” moment.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#platters" className="inline-flex items-center gap-3 rounded-full bg-[#572514] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
+                Browse the menu <ChevronRight size={15} />
+              </a>
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#572514]/35 bg-[#fff1d5]/45 px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#572514] transition-colors hover:bg-[#fff1d5]/70" data-testid="link-whatsapp-hero">
+                WhatsApp us <ArrowUpRight size={15} />
+              </a>
+            </div>
           </div>
-          <h1 className="max-w-2xl font-display text-[4.4rem] leading-[.84] tracking-[-.045em] text-[#572514] sm:text-[6.8rem] lg:text-[8.5rem]">
-            Flavours<br /><em className="text-[#b4402b]">that feel</em><br />like home.
-          </h1>
-          <p className="mt-8 max-w-md text-base leading-7 text-[#6f5342] sm:text-lg">
-            Platters, breakfast and lunch spreads, birthday packages and peppered bites made for the table, the office, and every “just one more” moment.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a href="#platters" className="inline-flex items-center gap-3 rounded-full bg-[#a7461d] px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#fff6e8] transition-transform hover:-translate-y-1" data-testid="link-browse-menu">
-              Browse the menu <ChevronRight size={15} />
-            </a>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#a7461d]/40 px-5 py-3.5 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#a7461d] transition-colors hover:bg-[#a7461d]/10" data-testid="link-whatsapp-hero">
-              WhatsApp us <ArrowUpRight size={15} />
-            </a>
+          <div className="relative min-h-80 overflow-hidden lg:min-h-full">
+            <ResponsiveFoodImage image={foodImages.jollof} alt="A generous plate of seasoned rice with vegetables and fresh garnishes" className="h-full w-full object-cover" objectPosition="center 56%" sizes="(max-width: 1023px) calc(100vw - 2.5rem), 48vw" loading="eager" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#f5b14f] via-[#f5b14f]/25 to-transparent lg:block" />
           </div>
-        </div>
-        <div className="reveal delay-2 relative mx-auto w-full max-w-[27rem]">
-          <div className="absolute -right-2 top-5 h-full w-full rotate-6 rounded-[48%] border border-[#75813d]/35" />
-          <div className="relative aspect-square overflow-hidden rounded-[48%] border-[10px] border-[#fff6e8] bg-[#f5d6a7] shadow-[0_25px_60px_rgba(84,40,18,.17)]">
-            <img src={logoPath} alt="Pepper & Puff — Flavours That Feel Like Home" className="h-full w-full object-cover" />
-          </div>
-          <div className="absolute -bottom-4 -left-3 flex rotate-[-7deg] items-center gap-2 rounded-full border border-[#572514]/15 bg-[#f8dfb6] px-4 py-2 shadow-sm">
-            <Sparkles size={14} className="text-[#b4402b]" />
-            <span className="font-mono-brand text-[9px] uppercase tracking-[.14em] text-[#572514]">Made fresh, always</span>
-          </div>
+          <div className="pointer-events-none absolute -left-16 -top-20 z-[1] h-44 w-44 rounded-full border-[30px] border-[#fff0ca]/35" aria-hidden="true" />
+          <div className="pointer-events-none absolute -bottom-20 left-[42%] z-[3] h-40 w-40 rounded-full border-[22px] border-[#d95f19]/35" aria-hidden="true" />
         </div>
       </section>
 
@@ -617,24 +670,24 @@ function MenuPage() {
         </div>
       </section>
 
-      <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-5 pb-5 sm:px-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap gap-2 px-5 pb-5 sm:px-8">
         {[
           ['platters', '01 · Platters'],
           ['meal-plans', '02 · Breakfast & lunch'],
           ['extras', '03 · Extras'],
           ['pepper-package', '04 · Our Pepper package'],
         ].map(([id, label]) => (
-          <a key={id} href={`#${id}`} className="shrink-0 rounded-full border border-[#5c2f15]/20 bg-[#fff6e8]/50 px-4 py-2 font-mono-brand text-[10px] uppercase tracking-[.14em] text-[#6f5342] transition-colors hover:border-[#a7461d] hover:text-[#a7461d]" data-testid={`link-category-${id}`}>{label}</a>
+          <a key={id} href={`#${id}`} className="rounded-full border border-[#5c2f15]/20 bg-[#fff6e8]/65 px-4 py-2 font-mono-brand text-[10px] uppercase tracking-[.12em] text-[#6f5342] transition-colors hover:border-[#a7461d] hover:text-[#a7461d]" data-testid={`link-category-${id}`}>{label}</a>
         ))}
       </div>
 
-      <CategorySection id="platters" eyebrow="01 / Made to share" title="Platters for every table." note="From a solo box to a full celebration spread, choose your mix of small chops, grilled favourites and peppered bites." items={platters} accent="#a7461d" onAdd={addItem} />
+      <CategorySection id="platters" eyebrow="01 / Made to share" title="Platters for every table." note="From a solo box to a full celebration spread, choose your mix of small chops, grilled favourites and peppered bites." items={platters} accent="#e77724" image={foodImages.samosa} imageAlt="Golden samosas arranged on a wooden tray" imagePosition="center 52%" onAdd={addItem} />
       <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="meal-plans" eyebrow="02 / Full spreads" title="Breakfast, lunch & celebrations." note="Thoughtful packages for office mornings, family lunches, birthdays and every gathering that needs a little more." items={mealPackages} accent="#b4402b" onAdd={addItem} />
+      <CategorySection id="meal-plans" eyebrow="02 / Full spreads" title="Breakfast, lunch & celebrations." note="Thoughtful packages for office mornings, family lunches, birthdays and every gathering that needs a little more." items={mealPackages} accent="#e77724" image={foodImages.jollof} imageAlt="A generous plate of seasoned rice with vegetables and fresh garnishes" imagePosition="center 56%" onAdd={addItem} />
       <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="extras" eyebrow="03 / Add a little more" title="Extras for the table." note="Build out your order with rice, protein, pastries, drinks and something sweet. Items without a listed price are available on request." items={extras} accent="#75813d" onAdd={addItem} />
+      <CategorySection id="extras" eyebrow="03 / Add a little more" title="Extras for the table." note="Build out your order with rice, protein, pastries, drinks and something sweet. Items without a listed price are available on request." items={extras} accent="#e77724" image={foodImages.pastries} imageAlt="Fresh seeded and flour-dusted loaves arranged on a dark baking surface" imagePosition="center 48%" onAdd={addItem} />
       <div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="fine-rule" /></div>
-      <CategorySection id="pepper-package" eyebrow="04 / Our Pepper package" title="Small bites, Pepper style." note="Choose a neat little box of samosa, spring roll, puff puff, mosa and your favourite peppered extras." items={pepperPackages} accent="#e68a32" onAdd={addItem} />
+      <CategorySection id="pepper-package" eyebrow="04 / Our Pepper package" title="Small bites, Pepper style." note="Choose a neat little box of samosa, spring roll, puff puff, mosa and your favourite peppered extras." items={pepperPackages} accent="#e77724" image={foodImages.samosa} imageAlt="Golden samosas arranged on a wooden tray with dipping sauce" imagePosition="center 52%" onAdd={addItem} />
 
       <section className="reveal mx-5 my-14 overflow-hidden rounded-[1.6rem] bg-[#e8a13e] sm:mx-8 lg:my-24">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 py-10 sm:px-12 sm:py-14 lg:grid-cols-[1fr_auto]">
